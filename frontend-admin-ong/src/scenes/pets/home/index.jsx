@@ -14,7 +14,7 @@ const PetsHome = () => {
 
   useEffect(() => {
     const listarPets = async () => {
-      const result = await axios.getData("/v1/donospets/pets", true);
+      const result = await axios.getData("api/ongs/pets", true);
       setPets(result.data);
     };
 
@@ -38,25 +38,21 @@ const PetsHome = () => {
         </Button>
       </Box>
       <Grid container spacing={2}>
-        {pets.items
-          ? pets.items.map((item, index) => {
-              return (
-                <Grid item xs={3} key={index}>
-                  <PetsCard pet={item} key={index} />
-                </Grid>
-              );
-            })
-          : <Alert severity="warning">
-          <AlertTitle>Aviso</AlertTitle>
-          Você não tem nenhum pet cadastrado, <strong>cadastre agora!</strong>
-        </Alert>}
         <Box m="20px" />
-        {!pets.items && (
+        {!pets.items ? (
           <Alert severity="warning">
             <AlertTitle>Aviso</AlertTitle>
             Você não tem nenhum pet cadastrado, <strong>cadastre agora!</strong>
           </Alert>
-        )}
+        ) : (
+          pets.items.map((item, index) => {
+            return (
+              <Grid item xs={3} key={index}>
+                <PetsCard pet={item} key={index} />
+              </Grid>
+            );
+          })
+        ) }
       </Grid>
     </Box>
   );

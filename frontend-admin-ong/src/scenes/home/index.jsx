@@ -1,14 +1,27 @@
-import React from 'react';
-import { Box } from "@mui/material";
-import Header from "../../components/Header";
+import * as React from 'react';
+import ProductCategories from '@/modules/views/ProductCategories';
+import ProductSmokingHero from '@/modules/views/ProductSmokingHero';
+import AppFooter from '@/modules/views/AppFooter';
+import ProductHero from '@/modules/views/ProductHero';
+import ProductValues from '@/modules/views/ProductValues';
+import ProductHowItWorks from '@/modules/views/ProductHowItWorks';
+import ProductCTA from '@/modules/views/ProductCTA';
+import AppAppBar from '@/modules/views/AppAppBar';
+import withRoot from '@/modules/withRoot';
 
-const Home = () => {
+function Index() {
   return (
-    <Box m="20px">
-      <Header title="Home" subtitle="Bem vindo ao site" />
-      <a href="/login">Login</a>
-    </Box>
+    <React.Fragment>
+      <AppAppBar />
+      <ProductHero />
+      {/* <ProductValues /> */}
+      <ProductCategories />
+      <ProductHowItWorks />
+      <ProductCTA />
+      {/* <ProductSmokingHero /> */}
+      <AppFooter />
+    </React.Fragment>
   );
-};
+}
 
-export default Home;
+export default withRoot(Index);

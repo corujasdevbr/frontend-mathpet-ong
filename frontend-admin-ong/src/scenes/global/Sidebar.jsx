@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
@@ -6,12 +6,15 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import PetsIcon from "@mui/icons-material/Pets";
+import PersonIcon from "@mui/icons-material/Person";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import jwt_decode from "jwt-decode";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -32,6 +35,15 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    let info = localStorage.getItem("matchpet-user");
+    let user = info !== null ? JSON.parse(info) : null;
+    var decoded = jwt_decode(user.token);
+    setUser(decoded);
+    console.log(decoded);
+  }, []);
 
   return (
     <Box
@@ -83,15 +95,17 @@ const Sidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
+
+                {user.logo != undefined && <Box display="flex" justifyContent="center" alignItems="center">
+                  <img
+                    alt={user.nome}
+                    width="100px"
+                    height="100px"
+                    src={user.logo}
+                    style={{ cursor: "pointer", borderRadius: "50%" }}
+                  />
+                </Box>}
+
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -99,10 +113,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  {user.name}
                 </Typography>
               </Box>
             </Box>
@@ -127,11 +138,17 @@ const Sidebar = () => {
             <Item
               title="Pets"
               to="/ong/pets"
-              icon={<PeopleOutlinedIcon />}
+              icon={<PetsIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            
+            <Item
+              title="Donos"
+              to="/ong/donos"
+              icon={<PersonIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
         </Menu>
       </ProSidebar>

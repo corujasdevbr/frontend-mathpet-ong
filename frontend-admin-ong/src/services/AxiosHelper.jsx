@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // set default baseURL
-axios.defaults.baseURL = 'https://192.168.0.20:7279/api';
+axios.defaults.baseURL = 'https://apimatchpet.azurewebsites.net/';
 
 // create a response interceptor to check for 401s
 axios.interceptors.response.use (

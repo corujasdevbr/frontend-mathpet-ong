@@ -87,7 +87,7 @@ export default function CadastrarPetForm() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        var result = await axios.postData("/pets", values, true);
+        var result = await axios.postData("api/pets", values, true);
         alert("success", "Pet Cadastrado");
         navigate("/ong/pets");
       } catch (error) {
@@ -141,7 +141,7 @@ export default function CadastrarPetForm() {
       (item) => item.value === event.target.value
     );
     var resultApi = await axios.get(
-      "/RacasPets?quantity=100&tipoPet=" + event.target.value,
+      "api/RacasPets?quantity=100&tipoPet=" + event.target.value,
       false
     );
     setRacas(resultApi.data.data.items);
@@ -491,7 +491,7 @@ export default function CadastrarPetForm() {
                 formik.errors.descricao}
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained">
+              <Button type="submit" fullWidth disabled={formik.isSubmitting} variant="contained">
                 Cadastrar
               </Button>
             </Grid>

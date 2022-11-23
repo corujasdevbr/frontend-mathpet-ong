@@ -31,7 +31,7 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}>
+        {/* <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (
@@ -43,7 +43,7 @@ const Topbar = () => {
         </IconButton>
         <IconButton>
           <SettingsOutlinedIcon />
-        </IconButton>
+        </IconButton> */}
         <PersonIconMenu />
       </Box>
     </Box>

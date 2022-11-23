@@ -74,7 +74,7 @@ export default function EditarPetForm() {
     onSubmit: async (values) => {
         try {
             console.log(values);
-            var result = await axios.upsertData(id,"/pets", values, true);
+            var result = await axios.upsertData(id,"api/pets", values, true);
 
             alert('success', 'Pet Alterado')
             navigate('/ong/pets');
@@ -97,7 +97,7 @@ export default function EditarPetForm() {
 
   useEffect(() => {
     const fetchData = async () => {
-        const result = await axios.getData(`/pets/` + id, false);
+        const result = await axios.getData(`api/pets/` + id, false);
         formik.setValues(result.data);
         formik.setFieldValue('especie', mockEspecieRaca.find(x => x.nome === result.data.racaPet.tipoPet).value);
         formik.setFieldValue('sexo', result.data.racaPet.tipoPet === 'Macho' ? 0 : 1);
@@ -149,7 +149,7 @@ export default function EditarPetForm() {
       (item) => item.value === tipoPet
     );
     var resultApi = await axios.get(
-      "/RacasPets?quantity=100&tipoPet=" + tipoPet,
+      "api/RacasPets?quantity=100&tipoPet=" + tipoPet,
       false
     );
     setRacas(resultApi.data.data.items);

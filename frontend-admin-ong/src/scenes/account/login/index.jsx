@@ -61,7 +61,7 @@ const Login = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
           try {
-            const response = await axios.postData('/account/login', {
+            const response = await axios.postData('api/account/login', {
               email: values.email,
               password: values.password,
             },false);

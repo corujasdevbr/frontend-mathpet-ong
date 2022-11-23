@@ -10,6 +10,8 @@ import Team from "../scenes/team";
 import Profile from "../scenes/profile";
 import PetsHome from "../scenes/pets/home";
 import PetsCadastrar from "../scenes/pets/cadastrar";
+import DonosHome from "../scenes/donos/home";
+import DonosCadastrar from "../scenes/donos/cadastrar";
 import PetsEditar from "../scenes/pets/editar";
 import Contacts from "../scenes/contacts";
 
@@ -26,6 +28,9 @@ const AppRoutes = () => (
         <Route path="pets" element={<PetsHome />} />
         <Route path="pets/cadastrar" element={<PetsCadastrar />} />
         <Route path="pets/editar/:id" element={<PetsEditar />} />
+        <Route path="donos" element={<DonosHome />} />
+        <Route path="donos/cadastrar" element={<DonosCadastrar />} />
+
         <Route path="team" element={<Team />} />
         <Route path="contacts" element={<Contacts />} />
       </Route>
